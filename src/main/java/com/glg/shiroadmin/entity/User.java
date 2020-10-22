@@ -67,12 +67,12 @@ public class User implements Serializable {
       /**
      * 创建时间
      */
-      private LocalDateTime createTime;
+      private Date createTime;
 
       /**
      * 修改时间
      */
-      private LocalDateTime modifiedTime;
+      private Date modifiedTime;
 
       /**
      * 0:超级管理员，1：系统用户
