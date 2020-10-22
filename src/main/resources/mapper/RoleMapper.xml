@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glg.shiroadmin.mapper.RoleMapper">
+<resultMap id="BaseResultMap" type="com.glg.shiroadmin.entity.Role">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+</resultMap>
+    <select id="findRoleByUser" resultType="com.glg.shiroadmin.entity.Role" parameterType="com.glg.shiroadmin.entity.User">
+        select
+            r.id,r.role_name roleName,r.remark,r.create_time createTime,r.modified_time modifiedTime,r.status
+        from
+            tb_user u
+        LEFT JOIN tb_user_role ur ON u.id = ur.user_id
+        LEFT JOIN tb_role r ON r.id = ur.role_id
+        <where>
+            1 = 1
+            <if test="user != null and user != '' ">
+                AND u.username = #{user.username}
+            </if>
+        </where>
+    </select>
+</mapper>
